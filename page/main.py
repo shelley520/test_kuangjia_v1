@@ -10,6 +10,7 @@ class Main(BasePage):
         """
         :return: Main类，类添加driver属性
         """
+        # //*[@resource-id = 'yeye元素']//*[@text='孙子元素']
         el1 = self.find(MobileBy.ID, "com.xueqiu.android:id/tv_banner")
         el1.click()
         return SearchList(self._driver)

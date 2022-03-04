@@ -20,11 +20,12 @@ class App(BasePage):
             caps["appPackage"] = "com.xueqiu.android"
             caps["appActivity"] = ".view.WelcomeActivityAlias"
             caps["noReset"] = True
+            caps["unicodeKeyboard"] = True
 
             self._driver = webdriver.Remote("http://localhost:4723/wd/hub", caps)
         else:
             self._driver.launch_app()
-        self._driver.implicitly_wait(5)
+        self._driver.implicitly_wait(10)
 
         return self
 

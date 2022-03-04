@@ -15,4 +15,4 @@ class TestXueQiu:
         self.main = self.app.start().main()
 
     def test_search(self):
-        self.main.goto_search().search()
+        self.main.goto_search().search("阿里巴巴-SW")
