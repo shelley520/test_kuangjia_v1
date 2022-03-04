@@ -1,13 +1,15 @@
 from appium.webdriver.common.mobileby import MobileBy
 
+from page.base_page import BasePage
 from page.searchlist import SearchList
 
 
-class Main:
-    def __init__(self,driver):
-        self._driver = driver
+class Main(BasePage):
 
     def goto_search(self):
-        el1 = self._driver.find_element(MobileBy.ID, "com.xueqiu.android:id/tv_banner")
+        """
+        :return: Main类，类添加driver属性
+        """
+        el1 = self.find(MobileBy.ID, "com.xueqiu.android:id/tv_banner")
         el1.click()
         return SearchList(self._driver)
