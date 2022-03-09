@@ -1,3 +1,6 @@
+import json
+
+import yaml
 from appium.webdriver.webdriver import WebDriver
 from selenium.webdriver.common.by import By
 from page.wrapper import handle_black
@@ -9,9 +12,10 @@ class BasePage:
     create init function in BasePage, and let the other class inherit the BasePage class
     """
 
-
+    _params = {}
     def __init__(self,driver:WebDriver = None):
         self._driver = driver
+
     @handle_black
     def finds(self,locator,value:str=None):
         element: list
@@ -26,6 +30,45 @@ class BasePage:
         element: WebDriver
         if isinstance(locator, tuple):
             element = self._driver.find_element(*locator)
+            self._driver.find_element()
         else:
             element = self._driver.find_element(locator, value)
         return element
+
+    @handle_black
+    def find_text(self, locator, value: str = None):
+        element: WebDriver
+        if isinstance(locator, tuple):
+            element_text = self._driver.find_element(*locator).text
+            self._driver.find_element()
+        else:
+            element_text = self._driver.find_element(locator, value).text
+        return element_text
+
+    def steps(self,path,name):
+        with open(path,encoding="utf-8") as f:
+            steps = yaml.safe_load(f)[name]
+        # raw = json.dumps(steps)
+        # print(raw)
+        # for key,value in self._params.items():
+        #     # ${name} | name:123
+        #     raw.replace(f'${{{key}}}',value)
+        # steps = json.loads(raw)
+
+        for step in steps:
+            element = None
+            if "action" in step.keys():
+                action = step["action"]
+                # print(action)
+                if "click" == action:
+                    element = self.find(step["by"], step["locator"]).click()
+                    # element.click()
+                if "send" == action:
+                    element = self.find(step["by"], step["locator"]).send_keys(step["value"])
+                    # element.send_keys(step["value"])
+                if "text" == action:
+                    element = self.find(step["by"], step["locator"]).text
+                    # ele = element.text
+                    return element
+                if "len>=0" == action:
+                    return element

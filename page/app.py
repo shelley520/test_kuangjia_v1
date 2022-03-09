@@ -20,6 +20,7 @@ class App(BasePage):
             caps["appPackage"] = "com.xueqiu.android"
             caps["appActivity"] = ".view.WelcomeActivityAlias"
             caps["noReset"] = True
+            #中文字输入
             caps["unicodeKeyboard"] = True
 
             self._driver = webdriver.Remote("http://localhost:4723/wd/hub", caps)

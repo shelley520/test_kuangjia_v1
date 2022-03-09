@@ -1,0 +1,17 @@
+
+  - by : id
+    locator: "com.xueqiu.android:id/search_input_text"
+    action: send
+    value: '${name}'
+
+  - by : xpath
+    locator: "//*[@resource-id='com.xueqiu.android:id/name' and @text='${name}']"
+    action: click
+
+  - by : xpath
+    locator: "//*[@resource-id='com.xueqiu.android:id/stockName' and @text='${name}']/../..//*[@resource-id='com.xueqiu.android:id/current_price']"
+    action: text
+
+  - by : xpath
+    locator: "//*[@resource-id='com.xueqiu.android:id/stockName' and @text='${name}']/../..//*[@resource-id='com.xueqiu.android:id/current_price']"
+    action: text

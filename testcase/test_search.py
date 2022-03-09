@@ -11,8 +11,8 @@ class TestXueQiu:
         实例化app类
         获取self.app.start().main()
         """
-        self.app = App()
-        self.main = self.app.start().main()
+        self.search = App().start().main().goto_search()
 
     def test_search(self):
-        self.main.goto_search().search("阿里巴巴-SW")
+        self.search.search()
+        self.search.get_price()
