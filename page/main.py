@@ -14,5 +14,5 @@ class Main(BasePage):
         """
         # //*[@resource-id = 'yeye元素']//*[@text='孙子元素']
         # self.find(By.ID, "com.xueqiu.android:id/tv_banner").click()
-        self.steps("../page/main.yaml","main")
+        self.steps("../teststep_yaml/main.yaml")
         return SearchList(self._driver)

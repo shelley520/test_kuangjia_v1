@@ -1,3 +1,4 @@
+import inspect
 import json
 
 import yaml
@@ -45,15 +46,17 @@ class BasePage:
             element_text = self._driver.find_element(locator, value).text
         return element_text
 
-    def steps(self,path,name):
+    def steps(self,path):
+        name = inspect.stack()[1].function
+        print(name)
         with open(path,encoding="utf-8") as f:
             steps = yaml.safe_load(f)[name]
-        # raw = json.dumps(steps)
-        # print(raw)
-        # for key,value in self._params.items():
-        #     # ${name} | name:123
-        #     raw.replace(f'${{{key}}}',value)
-        # steps = json.loads(raw)
+        raw = json.dumps(steps)
+        print(raw)
+        for key,value in self._params.items():
+            # ${name} | name:123
+            raw = raw.replace(f'${{{key}}}',value)
+        steps = json.loads(raw)
 
         for step in steps:
             element = None

@@ -1,3 +1,4 @@
+# import pytest
 from appium import webdriver
 
 from page.base_page import BasePage
@@ -8,11 +9,14 @@ class App(BasePage):
     """
     inherit BasePage class
     """
+
+    # @pytest.mark.parametrize
     def start(self):
         """
         添加if else 判断；若不存在driver，添加driver参数，若driver存在，self._driver.launch_app()启动app
         :return: self实例，这样test case才能用串联模式：self.main = self.app.start().main()
         """
+
         if self._driver == None:
             caps = {}
             caps["platformName"] = "Android"
@@ -26,7 +30,7 @@ class App(BasePage):
             self._driver = webdriver.Remote("http://localhost:4723/wd/hub", caps)
         else:
             self._driver.launch_app()
-        self._driver.implicitly_wait(10)
+        self._driver.implicitly_wait(20)
 
         return self
 

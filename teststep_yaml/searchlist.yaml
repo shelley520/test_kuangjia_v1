@@ -1,4 +1,4 @@
-
+search:
   - by : id
     locator: "com.xueqiu.android:id/search_input_text"
     action: send
@@ -12,6 +12,7 @@
     locator: "//*[@resource-id='com.xueqiu.android:id/stockName' and @text='${name}']/../..//*[@resource-id='com.xueqiu.android:id/current_price']"
     action: text
 
+get_price:
   - by : xpath
     locator: "//*[@resource-id='com.xueqiu.android:id/stockName' and @text='${name}']/../..//*[@resource-id='com.xueqiu.android:id/current_price']"
     action: text
