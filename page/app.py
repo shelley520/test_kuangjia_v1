@@ -1,4 +1,5 @@
 # import pytest
+import yaml
 from appium import webdriver
 
 from page.base_page import BasePage
@@ -18,14 +19,15 @@ class App(BasePage):
         """
 
         if self._driver == None:
-            caps = {}
-            caps["platformName"] = "Android"
-            caps["deviceName"] = "127.0.0.1:7555"
-            caps["appPackage"] = "com.xueqiu.android"
-            caps["appActivity"] = ".view.WelcomeActivityAlias"
-            caps["noReset"] = True
+            caps = dict()
+            value = yaml.safe_load(open("../testdata_yaml/config.yaml"))
+            caps["platformName"] = value['caps']['platformName']
+            caps["deviceName"] = value['caps']['deviceName']
+            caps["appPackage"] = value['caps']['appPackage']
+            caps["appActivity"] = value['caps']['appActivity']
+            caps["noReset"] = value['caps']['noReset']
             #中文字输入
-            caps["unicodeKeyboard"] = True
+            caps["unicodeKeyboard"] =value['caps']['unicodeKeyboard']
 
             self._driver = webdriver.Remote("http://localhost:4723/wd/hub", caps)
         else:
